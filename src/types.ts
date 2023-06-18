@@ -1,5 +1,6 @@
 export type Recipe = {
-  id?: string;
+  id: string;
+  chefId: string,
   name: string;
   people: number;
   preparationTime: number;
@@ -13,7 +14,7 @@ export type Ingredient = {
 }
 
 export type User = {
-  id?: string;
+  id: string;
   username: string;
   password: string;
   email: string;

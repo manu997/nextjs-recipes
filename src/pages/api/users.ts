@@ -1,22 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { postRecipe } from "../../../firebase/recipeController";
 import NextCors from "nextjs-cors";
-import { getAllElementsByType } from "../../../firebase/elementController";
+import { postUser } from "../../../firebase/userController";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await NextCors(req, res, {
-    methods: ["GET", "POST"],
+    methods: ["POST"],
     origin: "*",
     optionsSuccessStatus: 200,
   });
   switch (req.method) {
-    case "GET":
-      const recipes = await getAllElementsByType("recipes");
-      res.status(200).json(recipes);
-      break;
     case "POST":
       try {
-        const post = await postRecipe(req.body);
+        const post = await postUser(req.body);
         res.status(201).json({ message: post });
       } catch (error: any) {
         res.status(400).json({ message: error });

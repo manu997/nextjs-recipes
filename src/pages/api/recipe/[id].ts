@@ -17,8 +17,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const recipe = await getElementByIdAndType(req.body.id, "recipes");
         res.status(200).json(recipe);
-      } catch (error) {
-        res.status(400).json({ message: "Receta no encontrada" });
+      } catch (error: any) {
+        res.status(400).json({ message: error });
       }
       break;
     case "DELETE":
@@ -29,8 +29,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await putRecipe(req.body.id, req.body.recipe);
         res.status(201).json({ message: "success" });
-      } catch (error) {
-        res.status(400).json({ message: "Faltan datos obligatorios" });
+      } catch (error: any) {
+        res.status(400).json({ message: error });
       }
       break;
     default:
