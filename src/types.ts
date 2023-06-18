@@ -1,3 +1,5 @@
+import { ComponentType } from "react";
+
 export type Recipe = {
   id: string;
   chefId: string,
@@ -21,4 +23,9 @@ export type User = {
   birthdate: string;
   recipes?: Array<Recipe>;
   favoritesRecipes?: Array<Recipe>;
+}
+
+export type Button = {
+  Icon: ComponentType;
+  text: string;
 }

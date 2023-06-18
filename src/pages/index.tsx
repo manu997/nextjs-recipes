@@ -1,5 +1,12 @@
+import Banner from "@/components/Banner";
+import CardsContainer from "@/components/CardsContainer";
 const Home = () => {
-  return <h1>HOLA</h1>
+  return (
+    <>
+      <Banner />
+      <CardsContainer />
+    </>
+  );
 };
 
 export default Home;
