@@ -1,23 +1,16 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCCUzcKIAxEgIMy5sTm3iZc4X56lystTMk",
-  authDomain: "recipes-web-app-fbc1f.firebaseapp.com",
-  databaseURL: "https://recipes-web-app-fbc1f-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "recipes-web-app-fbc1f",
-  storageBucket: "recipes-web-app-fbc1f.appspot.com",
-  messagingSenderId: "769820562426",
-  appId: "1:769820562426:web:09ae91df2287f3574e0a43",
-  measurementId: "G-NMMRWSD88B"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
 const firebase_app = initializeApp(firebaseConfig);
 export const db = getFirestore(firebase_app);
