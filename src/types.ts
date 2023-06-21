@@ -32,9 +32,13 @@ export type Button = {
 }
 
 export type CardsContainerProps = {
-  recipes: Array<Recipe>|undefined;
+  recipes: Array<Recipe>;
 }
 
 export type RecipeCardProps = {
   recipe: Recipe;
+}
+
+export type HomeProps<T> = {
+  recipes: Array<Recipe>;
 }

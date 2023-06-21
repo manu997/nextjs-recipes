@@ -8,19 +8,11 @@ import {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await NextCors(req, res, {
-    methods: ["GET", "DELETE", "PUT"],
+    methods: ["DELETE", "PUT"],
     origin: "*",
     optionsSuccessStatus: 200,
   });
   switch (req.method) {
-    case "GET":
-      try {
-        const recipe = await getElementByIdAndType(req.query.id as string, "recipes");
-        res.status(200).json(recipe);
-      } catch (error: Error | any) {
-        res.status(404).json({ message: error.message });
-      }
-      break;
     case "DELETE":
       await deleteElementByIdAndType(req.query.id as string, "recipes");
       res.status(200).json({ message: "success" });

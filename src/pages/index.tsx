@@ -1,19 +1,21 @@
 import Banner from "@/components/Banner";
 import CardsContainer from "@/components/CardsContainer";
-import useRecipes from "@/hooks/useRecipes";
+import { getAllElementsByType } from "../../firebase/elementController";
+import { HomeProps, Recipe } from "@/types";
+import { GetServerSideProps } from "next";
 
-const Home = () => {
-  const allRecipes = useRecipes();
+const Home = ({ recipes }: HomeProps<typeof getServerSideProps>) => {
   return (
     <>
       <Banner />
-      {allRecipes.isFetching ? (
-        <div>Loading...</div>
-      ) : (
-        <CardsContainer recipes={allRecipes.data} />
-      )}
+      <CardsContainer recipes={recipes} />
     </>
   );
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const recipes = await getAllElementsByType("recipes");
+  return { props: { recipes: recipes as Array<Recipe>} };
+};

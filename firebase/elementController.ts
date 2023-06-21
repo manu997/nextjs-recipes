@@ -10,11 +10,11 @@ import { db } from "./clientApp";
 export const getAllElementsByType = async (type: string) => {
   const querySnapshot = await getDocs(collection(db, type));
   return querySnapshot.docs.map((doc) => {
-    const recipe = {
+    const elements = {
       id: doc.id,
       ...doc.data(),
     }
-    return recipe;
+    return elements;
   });
 };
 
