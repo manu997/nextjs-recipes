@@ -15,19 +15,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "GET":
       try {
-        const recipe = await getElementByIdAndType(req.body.id, "recipes");
+        const recipe = await getElementByIdAndType(req.query.id as string, "recipes");
         res.status(200).json(recipe);
-      } catch (error: any) {
-        res.status(400).json({ message: error });
+      } catch (error: Error | any) {
+        res.status(404).json({ message: error.message });
       }
       break;
     case "DELETE":
-      await deleteElementByIdAndType(req.body.id, "recipes");
+      await deleteElementByIdAndType(req.query.id as string, "recipes");
       res.status(200).json({ message: "success" });
       break;
     case "PUT":
       try {
-        await putRecipe(req.body.id, req.body.recipe);
+        await putRecipe(req.query.id as string, req.body.recipe);
         res.status(201).json({ message: "success" });
       } catch (error: any) {
         res.status(400).json({ message: error });

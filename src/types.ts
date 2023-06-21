@@ -2,12 +2,13 @@ import { ComponentType } from "react";
 
 export type Recipe = {
   id: string;
-  chefId: string,
+  chefName: string;
   name: string;
   people: number;
   preparationTime: number;
   ingredients: Array<string>;
   steps: Array<string>;
+  image: string;
 };
 
 export type Ingredient = {
@@ -28,4 +29,12 @@ export type User = {
 export type Button = {
   Icon: ComponentType;
   text: string;
+}
+
+export type CardsContainerProps = {
+  recipes: Array<Recipe>|undefined;
+}
+
+export type RecipeCardProps = {
+  recipe: Recipe;
 }

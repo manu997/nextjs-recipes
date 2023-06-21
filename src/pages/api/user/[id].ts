@@ -15,19 +15,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "GET":
       try {
-        const user = await getElementByIdAndType(req.body.id, "users");
+        const user = await getElementByIdAndType(req.query.id as string, "users");
         res.status(200).json(user);
       } catch (error) {
         res.status(400).json({ message: "Usuario no encontrado" });
       }
       break;
     case "DELETE":
-      await deleteElementByIdAndType(req.body.id, "users");
+      await deleteElementByIdAndType(req.query.id as string, "users");
       res.status(200).json({ message: "success" });
       break;
     case "PUT":
       try {
-        await putUser(req.body.id, req.body.user);
+        await putUser(req.query.id as string, req.body.user);
         res.status(201).json({ message: "success" });
       } catch (error) {
         res.status(400).json({ message: "Faltan datos obligatorios" });

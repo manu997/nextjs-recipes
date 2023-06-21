@@ -14,6 +14,7 @@ module.exports = {
         lg: "0 8px 16px var(--tw-shadow-color)",
       },
       screens: {
+        'md': '767px', // For iPad
         '3xl': '2000px',
       }
     },
