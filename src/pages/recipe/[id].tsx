@@ -4,9 +4,16 @@ import {
   getElementByIdAndType,
 } from "../../../firebase/elementController";
 import { Recipe, RecipePageProps } from "@/types";
+import Banner from "@/components/Banner";
 
 const RecipePage = ({ recipe }: RecipePageProps) => {
-  return <p>{recipe.name}</p>;
+  return (
+    <>
+    <Banner />
+    <img className="mx-auto my-5 rounded-3xl" src={recipe.image} alt={recipe.name} />
+    </>
+    
+  )
 };
 
 export default RecipePage;
