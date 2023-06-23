@@ -4,7 +4,7 @@ import { Recipe } from "../src/types";
 import { checkElementRequiredFields } from "./validationController";
 
 const requiredFields = [
-  "chefId",
+  "chefName",
   "name",
   "preparationTime",
   "people",

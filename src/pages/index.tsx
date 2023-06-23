@@ -4,7 +4,7 @@ import { getAllElementsByType } from "../../firebase/elementController";
 import { HomeProps, Recipe } from "@/types";
 import { GetServerSideProps } from "next";
 
-const Home = ({ recipes }: HomeProps<typeof getServerSideProps>) => {
+const Home = ({ recipes }: HomeProps) => {
   return (
     <>
       <Banner />
@@ -17,5 +17,5 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const recipes = await getAllElementsByType("recipes");
-  return { props: { recipes: recipes as Array<Recipe>} };
+  return { props: { recipes: recipes as Array<Recipe> } };
 };

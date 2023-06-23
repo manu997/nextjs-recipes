@@ -13,8 +13,8 @@ export type Recipe = {
 
 export type Ingredient = {
   name: string;
-  quantity: number; 
-}
+  quantity: number;
+};
 
 export type User = {
   id: string;
@@ -24,21 +24,25 @@ export type User = {
   birthdate: string;
   recipes?: Array<Recipe>;
   favoritesRecipes?: Array<Recipe>;
-}
+};
 
 export type Button = {
   Icon: ComponentType;
   text: string;
-}
+};
 
 export type CardsContainerProps = {
   recipes: Array<Recipe>;
-}
+};
 
 export type RecipeCardProps = {
   recipe: Recipe;
-}
+};
 
-export type HomeProps<T> = {
+export type HomeProps = {
   recipes: Array<Recipe>;
-}
+};
+
+export type RecipePageProps = {
+  recipe: Recipe;
+};
