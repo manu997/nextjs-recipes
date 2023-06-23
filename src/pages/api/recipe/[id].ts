@@ -3,7 +3,6 @@ import { putRecipe } from "../../../../firebase/recipeController";
 import NextCors from "nextjs-cors";
 import {
   deleteElementByIdAndType,
-  getElementByIdAndType,
 } from "../../../../firebase/elementController";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

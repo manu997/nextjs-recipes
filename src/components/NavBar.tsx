@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import Button from "./Button";
+import ButtonProps from "./Button";
 
 const NavBar = () => {
   return (

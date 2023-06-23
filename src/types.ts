@@ -6,7 +6,7 @@ export type Recipe = {
   name: string;
   people: number;
   preparationTime: number;
-  ingredients: Array<string>;
+  ingredients: Array<Ingredient>;
   steps: Array<string>;
   image: string;
 };
@@ -14,6 +14,7 @@ export type Recipe = {
 export type Ingredient = {
   name: string;
   quantity: number;
+  measure: string;
 };
 
 export type User = {
@@ -26,9 +27,10 @@ export type User = {
   favoritesRecipes?: Array<Recipe>;
 };
 
-export type Button = {
+export type ButtonProps = {
   Icon: ComponentType;
   text: string;
+  href: string;
 };
 
 export type CardsContainerProps = {
