@@ -12,9 +12,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "POST":
       try {
         const post = await postUser(req.body);
-        res.status(201).json({ message: post });
+        res.status(201).json(post);
       } catch (error: any) {
-        res.status(400).json({ message: error });
+        res.status(400).send(error);
       }
       break;
     default:

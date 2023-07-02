@@ -1,7 +1,11 @@
 import { ComponentType } from "react";
 
-export type Recipe = {
+export type Element = {
   id: string;
+};
+
+export type Recipe = {
+  id?: string;
   chefName: string;
   name: string;
   people: number;
@@ -14,7 +18,6 @@ export type Recipe = {
 export type Ingredient = {
   name: string;
   quantity: number;
-  measure: string;
 };
 
 export type User = {
@@ -31,6 +34,8 @@ export type ButtonProps = {
   Icon: ComponentType;
   text: string;
   href: string;
+  onclick?: () => void;
+  hidden?: boolean;
 };
 
 export type CardsContainerProps = {
@@ -47,4 +52,8 @@ export type HomeProps = {
 
 export type RecipePageProps = {
   recipe: Recipe;
+};
+
+export type UserPageProps = {
+  user: User;
 };

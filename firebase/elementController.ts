@@ -6,22 +6,16 @@ import {
   collection,
 } from "firebase/firestore";
 import { db } from "./clientApp";
-import { Recipe } from "@/types";
+import { Element } from "@/types";
 
 export const getAllElementsByType = async (type: string) => {
   const querySnapshot = await getDocs(collection(db, type));
   return querySnapshot.docs.map((doc) => {
-    const elements: Recipe = {
+    const element: Element = {
       id: doc.id,
-      chefName: doc.data().chefName,
-      name: doc.data().name,
-      people: doc.data().people,
-      preparationTime: doc.data().preparationTime,
-      ingredients: doc.data().ingredients,
-      steps: doc.data().steps,
-      image: doc.data().image,
+      ...doc.data(),
     };
-    return elements;
+    return element;
   });
 };
 

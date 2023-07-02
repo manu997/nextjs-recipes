@@ -1,4 +1,4 @@
-import { collection, doc, updateDoc, addDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./clientApp";
 import { User } from "../src/types";
@@ -8,7 +8,7 @@ const requiredFields = ["username", "password", "email", "birthDate"];
 
 const isValidUser = (user: User) => {
   return (
-    checkElementRequiredFields(user, requiredFields) && user.password.length > 6
+    checkElementRequiredFields(user, requiredFields)
   );
 };
 
@@ -17,11 +17,22 @@ const auth = getAuth();
 export const postUser = async (user: User) => {
   if (isValidUser(user)) {
     try {
-      return await createUserWithEmailAndPassword(
+      const userCreated = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password
       );
+      const userWithAdditionalFields = {
+        ...user,
+        id: userCreated.user.uid,
+        recipes: [],
+        favoritesRecipes: [],
+      };
+      await setDoc(
+        doc(db, "users", userCreated.user.uid),
+        userWithAdditionalFields
+      );
+      return userWithAdditionalFields;
     } catch (error) {
       throw new Error("Error al crear el usuario.");
     }

@@ -20,8 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         );
         res
           .status(200)
-          .json({ message: `User ${userCredential.user.email} logged in` });
-        return userCredential;
+          .json(userCredential.user);
       } catch (error: Error | any) {
         res.status(400).json({ code: error.code, message: error.message });
       }

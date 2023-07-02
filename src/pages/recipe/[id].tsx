@@ -7,8 +7,18 @@ import { Recipe, RecipePageProps } from "@/types";
 import Banner from "@/components/Banner";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/Button";
+import { useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { firebaseApp } from "../../../firebase/clientApp";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const RecipePage = ({ recipe }: RecipePageProps) => {
+  const auth = getAuth(firebaseApp)
+
+  const [user, loading] = useAuthState(auth)
+  useEffect(() => {
+    console.log(user)
+  }, [])
   return (
     <>
       <Banner />
