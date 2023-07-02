@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { firebaseApp } from "../../firebase/clientApp";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { errorMessages } from "@/utils/errorMessages";
 import { SyncLoader } from "react-spinners";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +20,8 @@ const LoginForm = () => {
 
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
 
   const handleLogin = async () => {
     const login = await signInWithEmailAndPassword(email, password);
@@ -36,7 +42,6 @@ const LoginForm = () => {
         className={`flex flex-col gap-4 w-1/3 mx-auto text-lg ${
           loading && "blur-sm"
         } w-full`}
-        
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="username">Correo electrónico</label>
@@ -66,6 +71,11 @@ const LoginForm = () => {
         >
           {loading ? "Cargando..." : "Iniciar sesión"}
         </button>
+        <GoogleLoginButton
+          onClick={() => signInWithGoogle()}
+          style={{ "border-radius": "999px", "box-shadow": "none", "border": "1px solid black", "padding-left": "1rem" }}
+          text="Iniciar sesión con Google"
+        />
       </form>
     </div>
   );

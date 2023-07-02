@@ -94,7 +94,7 @@ const RegisterForm = () => {
           onClick={handleRegister}
           disabled={loading}
         >
-          Registrarse
+          {loading ? "Cargando..." : "Registrarse"}
         </button>
       </form>
     </div>
