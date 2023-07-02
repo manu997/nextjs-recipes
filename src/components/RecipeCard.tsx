@@ -1,4 +1,4 @@
-import { RecipeCardProps } from "@/types";
+import { RecipeCardProps } from "@/utils/types";
 import Link from "next/link";
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {

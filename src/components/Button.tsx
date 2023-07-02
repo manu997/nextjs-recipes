@@ -1,4 +1,4 @@
-import { ButtonProps } from "@/types";
+import { ButtonProps } from "@/utils/types";
 import Link from "next/link";
 
 const Button = ({ Icon, text, href, onclick, hidden }: ButtonProps) => {

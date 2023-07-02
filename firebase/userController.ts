@@ -1,15 +1,14 @@
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "./clientApp";
-import { User } from "../src/types";
+import { User } from "../src/utils/types";
 import { checkElementRequiredFields } from "./validationController";
+import { FirebaseError } from "firebase/app";
 
 const requiredFields = ["username", "password", "email", "birthDate"];
 
 const isValidUser = (user: User) => {
-  return (
-    checkElementRequiredFields(user, requiredFields)
-  );
+  return checkElementRequiredFields(user, requiredFields);
 };
 
 const auth = getAuth();
@@ -33,11 +32,11 @@ export const postUser = async (user: User) => {
         userWithAdditionalFields
       );
       return userWithAdditionalFields;
-    } catch (error) {
-      throw new Error("Error al crear el usuario.");
+    } catch (error: FirebaseError | any) {
+      throw error;
     }
   } else {
-    throw new Error("Faltan campos obligatorios.");
+    throw new Error("pendingRequieredFields");
   }
 };
 

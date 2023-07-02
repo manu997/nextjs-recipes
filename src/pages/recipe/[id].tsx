@@ -3,7 +3,7 @@ import {
   getAllElementsByType,
   getElementByIdAndType,
 } from "../../../firebase/elementController";
-import { Recipe, RecipePageProps } from "@/types";
+import { Recipe, RecipePageProps } from "@/utils/types";
 import Banner from "@/components/Banner";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/Button";

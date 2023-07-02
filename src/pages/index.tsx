@@ -1,7 +1,7 @@
 import Banner from "@/components/Banner";
 import CardsContainer from "@/components/CardsContainer";
 import { getAllElementsByType } from "../../firebase/elementController";
-import { HomeProps, Recipe } from "@/types";
+import { HomeProps, Recipe } from "@/utils/types";
 import { GetServerSideProps } from "next";
 
 const Home = ({ recipes }: HomeProps) => {

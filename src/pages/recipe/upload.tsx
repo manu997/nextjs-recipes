@@ -5,20 +5,19 @@ import Button from "@/components/Button";
 import Banner from "@/components/Banner";
 import { ArrowLeftIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
-import { Recipe } from "@/types";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Recipe } from "@/utils/types";
+import { getAuth } from "firebase/auth";
 import { firebaseApp } from "../../../firebase/clientApp";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const UploadPage = () => {
   const router = useRouter();
+  const auth = getAuth(firebaseApp);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
-    onAuthStateChanged(getAuth(firebaseApp), (user) => {
-      if (user === null) {
-        router.push("/");
-      }
-    });
-  }, []);
+    user === null && router.push("/");
+  }, [user]);
 
   const [recipe, setRecipe] = useState<Recipe>({
     chefName: "",

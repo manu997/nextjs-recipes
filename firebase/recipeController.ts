@@ -1,6 +1,6 @@
 import { collection, doc, updateDoc, addDoc } from "firebase/firestore";
 import { db } from "./clientApp";
-import { Recipe } from "../src/types";
+import { Recipe } from "../src/utils/types";
 import { checkElementRequiredFields } from "./validationController";
 
 const requiredFields = [

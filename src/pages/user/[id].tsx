@@ -3,7 +3,7 @@ import {
   getAllElementsByType,
   getElementByIdAndType,
 } from "../../../firebase/elementController";
-import { User, UserPageProps } from "@/types";
+import { User, UserPageProps } from "@/utils/types";
 
 const UserPage = ({ user }: UserPageProps) => {
   return (

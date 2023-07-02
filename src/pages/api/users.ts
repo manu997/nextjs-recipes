@@ -13,8 +13,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const post = await postUser(req.body);
         res.status(201).json(post);
-      } catch (error: any) {
-        res.status(400).send(error);
+      } catch (error: Error | any) {
+        res.status(400).json(error.code || error.message);
       }
       break;
     default:

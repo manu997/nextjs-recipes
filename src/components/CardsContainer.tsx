@@ -1,4 +1,4 @@
-import { CardsContainerProps } from "@/types";
+import { CardsContainerProps } from "@/utils/types";
 import RecipeCard from "./RecipeCard";
 
 const CardsContainer = ({ recipes }: CardsContainerProps) => {

@@ -6,7 +6,7 @@ import {
   collection,
 } from "firebase/firestore";
 import { db } from "./clientApp";
-import { Element } from "@/types";
+import { Element } from "@/utils/types";
 
 export const getAllElementsByType = async (type: string) => {
   const querySnapshot = await getDocs(collection(db, type));
