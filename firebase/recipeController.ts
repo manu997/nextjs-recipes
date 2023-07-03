@@ -5,7 +5,7 @@ import { checkElementRequiredFields } from "./validationController";
 import { FirebaseError } from "firebase/app";
 
 const requiredFields = [
-  "imageUrl",
+  "image",
   "chefName",
   "name",
   "preparationTime",

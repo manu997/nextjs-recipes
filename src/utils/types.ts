@@ -12,7 +12,7 @@ export type Recipe = {
   preparationTime: number;
   ingredients: Array<Ingredient>;
   steps: Array<string>;
-  imageUrl: string;
+  image: string;
 };
 
 export type Ingredient = {

@@ -10,6 +10,9 @@ import { toast } from "react-toastify";
 import { errorMessages } from "@/utils/errorMessages";
 import { SyncLoader } from "react-spinners";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import { useUsernameStore } from "@/pages/contexts/useUsernameStore";
+import axios from "axios";
+import { User } from "@/utils/types";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -23,11 +26,17 @@ const LoginForm = () => {
 
   const [signInWithGoogle] = useSignInWithGoogle(auth);
 
-  const handleLogin = async () => {
+  const setUsername = useUsernameStore((state) => state.setUsername);
+
+  const handleLogin = async (email: string, password: string) => {
     const login = await signInWithEmailAndPassword(email, password);
-    login?.user !== undefined
-      ? router.push("/")
-      : toast.error(errorMessages[error?.code as string]);
+    if (login?.user !== undefined) {
+      const { data } = await axios<User>(`/api/user/${login?.user.uid}`);
+      setUsername(data.username);
+      router.push("/");
+    } else {
+      toast.error(errorMessages[error?.code as string]);
+    }
   };
 
   return (
@@ -66,14 +75,19 @@ const LoginForm = () => {
         <button
           className="rounded-3xl text-gray-800 text-lg  font-semibold py-2 px-4 bg-yellow-300 border border-gray-800 transition duration-300 hover:bg-yellow-500 hover:drop-shadow-lg"
           type="button"
-          onClick={handleLogin}
+          onClick={() => handleLogin(email, password)}
           disabled={loading}
         >
           {loading ? "Cargando..." : "Iniciar sesión"}
         </button>
         <GoogleLoginButton
           onClick={() => signInWithGoogle()}
-          style={{ "border-radius": "999px", "box-shadow": "none", "border": "1px solid black", "padding-left": "1rem" }}
+          style={{
+            "border-radius": "999px",
+            "box-shadow": "none",
+            border: "1px solid black",
+            "padding-left": "1rem",
+          }}
           text="Iniciar sesión con Google"
         />
       </form>

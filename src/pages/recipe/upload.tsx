@@ -12,22 +12,14 @@ import { useRouter } from "next/router";
 import { Ingredient, Recipe } from "@/utils/types";
 import { getAuth } from "firebase/auth";
 import { firebaseApp } from "../../../firebase/clientApp";
-import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import Head from "next/head";
 import { errorMessages } from "@/utils/errorMessages";
 import { SyncLoader } from "react-spinners";
-import { doc, getFirestore } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useUsernameStore } from "../contexts/useUsernameStore";
 
 const UploadPage = () => {
   const router = useRouter();
   const auth = getAuth(firebaseApp);
-
-  const [user] = useAuthState(auth)
-
-  const [userData] = useDocumentOnce(
-    doc(getFirestore(firebaseApp), "users", user?.uid as string)
-  );
 
   const [recipe, setRecipe] = useState<Recipe>({
     chefName: "",
@@ -36,7 +28,7 @@ const UploadPage = () => {
     people: 0,
     ingredients: [],
     steps: [],
-    imageUrl: "",
+    image: "",
   });
 
   const [ingredient, setIngredient] = useState({ name: "", quantity: 0 });
@@ -44,9 +36,11 @@ const UploadPage = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const username = useUsernameStore((state) => state.username);
+
   const handleRecipe = useCallback(async () => {
     setLoading(true);
-    setRecipe({...recipe, chefName: await userData?.data()?.username})
+    setRecipe({ ...recipe, chefName: username });
     try {
       await axios.post("/api/recipes", recipe);
       toast.success("¡Receta subida con éxito!");
@@ -110,7 +104,7 @@ const UploadPage = () => {
                 type="text"
                 placeholder="URL de imagen..."
                 onChange={(e) =>
-                  setRecipe({ ...recipe, imageUrl: e.target.value })
+                  setRecipe({ ...recipe, image: e.target.value })
                 }
               />
             </div>

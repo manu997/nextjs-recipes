@@ -5,6 +5,10 @@ import { getAuth } from "firebase/auth";
 import { firebaseApp } from "../../firebase/clientApp";
 import { errorMessages } from "../utils/errorMessages";
 import { SyncLoader } from "react-spinners";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { User } from "@/utils/types";
+import { useUsernameStore } from "@/pages/contexts/useUsernameStore";
+import { useRouter } from "next/router";
 
 const RegisterForm = () => {
   const [newUser, setNewUser] = useState({
@@ -14,15 +18,33 @@ const RegisterForm = () => {
     birthDate: "",
   });
 
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
 
   const auth = getAuth(firebaseApp);
 
+  const [signInWithEmailAndPassword, user, loadingLogin, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  const setUsername = useUsernameStore((state) => state.setUsername);
+
   const handleRegister = async () => {
     setLoading(true);
     try {
-      await axios.post("/api/users", newUser);
+      await axios.post<User>("/api/users", newUser);
       toast.success("¡Registro exitoso!");
+      const login = await signInWithEmailAndPassword(
+        newUser.email,
+        newUser.password
+      );
+      if (login?.user !== undefined) {
+        const { data } = await axios<User>(`/api/user/${login?.user.uid}`);
+        setUsername(data.username);
+        router.push("/");
+      } else {
+        toast.error(errorMessages[error?.code as string]);
+      }
     } catch (error: Error | any) {
       setLoading(false);
       toast.error(errorMessages[error.request.response]);
