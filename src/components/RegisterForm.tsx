@@ -7,8 +7,8 @@ import { errorMessages } from "../utils/errorMessages";
 import { SyncLoader } from "react-spinners";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { User } from "@/utils/types";
-import { useUsernameStore } from "@/pages/contexts/useUsernameStore";
 import { useRouter } from "next/router";
+import { useUsernameStore } from "@/contexts/useUsernameStore";
 
 const RegisterForm = () => {
   const [newUser, setNewUser] = useState({

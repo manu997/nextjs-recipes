@@ -10,9 +10,9 @@ import { toast } from "react-toastify";
 import { errorMessages } from "@/utils/errorMessages";
 import { SyncLoader } from "react-spinners";
 import { GoogleLoginButton } from "react-social-login-buttons";
-import { useUsernameStore } from "@/pages/contexts/useUsernameStore";
 import axios from "axios";
 import { User } from "@/utils/types";
+import { useUsernameStore } from "@/contexts/useUsernameStore";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");

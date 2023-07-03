@@ -15,7 +15,7 @@ import { firebaseApp } from "../../../firebase/clientApp";
 import Head from "next/head";
 import { errorMessages } from "@/utils/errorMessages";
 import { SyncLoader } from "react-spinners";
-import { useUsernameStore } from "../contexts/useUsernameStore";
+import { useUsernameStore } from "@/contexts/useUsernameStore";
 
 const UploadPage = () => {
   const router = useRouter();
