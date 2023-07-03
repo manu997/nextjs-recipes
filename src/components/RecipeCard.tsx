@@ -4,7 +4,7 @@ import Link from "next/link";
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
   return (
     <Link className="md:h-auto w-full" href={`/recipe/${recipe.id}`}>
-      <div className="shadow-lg rounded-3xl flex flex-col md:h-full h-fit ">
+      <div className="shadow-md rounded-3xl flex flex-col md:h-full h-fit ">
         <img
           src={recipe.image}
           className="rounded-t-3xl h-[65%] min-h-[65%]"

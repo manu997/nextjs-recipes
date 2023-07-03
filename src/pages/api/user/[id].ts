@@ -14,8 +14,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
   switch (req.method) {
     case "GET":
-      const user = await getElementByIdAndType(req.query.id as string, "users");
+      try {
+        const user = await getElementByIdAndType(req.query.id as string, "users");
       res.status(200).json(user);
+      } catch (error: Error | any) {
+        res.status(404).json(error.code || error.message);
+      }
+      
     case "DELETE":
       await deleteElementByIdAndType(req.query.id as string, "users");
       res.status(200).json({ message: "success" });

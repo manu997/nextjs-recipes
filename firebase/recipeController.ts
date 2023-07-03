@@ -2,8 +2,10 @@ import { collection, doc, updateDoc, addDoc } from "firebase/firestore";
 import { db } from "./clientApp";
 import { Recipe } from "../src/utils/types";
 import { checkElementRequiredFields } from "./validationController";
+import { FirebaseError } from "firebase/app";
 
 const requiredFields = [
+  "imageUrl",
   "chefName",
   "name",
   "preparationTime",
@@ -14,10 +16,14 @@ const requiredFields = [
 
 export const postRecipe = async (recipe: Recipe) => {
   if (checkElementRequiredFields(recipe, requiredFields)) {
-    const docRef = await addDoc(collection(db, "recipes"), recipe);
-    return `Receta con ID ${docRef.id} creada.`;
+    try {
+      const docRef = await addDoc(collection(db, "recipes"), recipe);
+      return `Receta con ID ${docRef.id} creada.`;
+    } catch (error: FirebaseError | any) {
+      throw error;
+    }
   } else {
-    throw new Error("Faltan campos obligatorios.");
+    throw new Error("pendingRequieredFields");
   }
 };
 
@@ -26,6 +32,6 @@ export const putRecipe = async (id: string, recipe: Recipe) => {
     await updateDoc(doc(db, "recipes", id), recipe);
     return `Receta con ID ${id} actualizada.`;
   } else {
-    throw new Error("Faltan campos obligatorios.");
+    throw new Error("pendingRequieredFields");
   }
 };

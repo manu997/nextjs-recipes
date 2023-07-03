@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const post = await postRecipe(req.body);
         res.status(201).json({ message: post });
       } catch (error: Error | any) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json(error.code || error.message);
       }
       break;
     default:

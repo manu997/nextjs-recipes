@@ -4,4 +4,6 @@ export const errorMessages: { [key: string]: string } = {
   'auth/invalid-email': "El email no es válido",
   'auth/user-not-found': "El usuario no existe",
   'auth/wrong-password': "La contraseña es incorrecta",
+  'auth/email-already-in-use': "El email ya está en uso",
+  '"notFound"': "Elemento no encontrado"
 };

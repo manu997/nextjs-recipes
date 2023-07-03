@@ -45,6 +45,6 @@ export const putUser = async (id: string, user: User) => {
     await updateDoc(doc(db, "users", id), user);
     return `Usuario con ID ${id} actualizado.`;
   } else {
-    throw new Error("Faltan campos obligatorios.");
+    throw new Error("pendingRequieredFields");
   }
 };

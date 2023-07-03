@@ -25,7 +25,7 @@ export const getElementByIdAndType = async (id: string, type: string) => {
   if (querySnapshot.exists()) {
     return querySnapshot.data();
   } else {
-    throw new Error(`No existe ningún elemento con ID ${id} en ${type}`);
+    throw new Error(`notFound`);
   }
 };
 

@@ -4,10 +4,14 @@ import {
   getElementByIdAndType,
 } from "../../../firebase/elementController";
 import { User, UserPageProps } from "@/utils/types";
+import Head from "next/head";
 
 const UserPage = ({ user }: UserPageProps) => {
   return (
     <div>
+      <Head>
+        <title>{user.username}</title>
+      </Head>
       {user.id} - {user.username}
     </div>
   );
