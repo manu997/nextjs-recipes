@@ -10,8 +10,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { Ingredient, Recipe } from "@/utils/types";
-import { getAuth } from "firebase/auth";
-import { firebaseApp } from "../../../firebase/clientApp";
 import Head from "next/head";
 import { errorMessages } from "@/utils/errorMessages";
 import { SyncLoader } from "react-spinners";
@@ -19,10 +17,10 @@ import { useUsernameStore } from "@/contexts/useUsernameStore";
 
 const UploadPage = () => {
   const router = useRouter();
-  const auth = getAuth(firebaseApp);
+  const username = useUsernameStore((state) => state.username);
 
   const [recipe, setRecipe] = useState<Recipe>({
-    chefName: "",
+    chefName: username,
     name: "",
     preparationTime: 0,
     people: 0,
@@ -36,11 +34,9 @@ const UploadPage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const username = useUsernameStore((state) => state.username);
-
   const handleRecipe = useCallback(async () => {
     setLoading(true);
-    setRecipe({ ...recipe, chefName: username });
+    console.log(recipe.chefName);
     try {
       await axios.post("/api/recipes", recipe);
       toast.success("¡Receta subida con éxito!");

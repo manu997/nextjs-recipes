@@ -31,7 +31,7 @@ const LoginForm = () => {
   const handleLogin = async (email: string, password: string) => {
     const login = await signInWithEmailAndPassword(email, password);
     if (login?.user !== undefined) {
-      const { data } = await axios<User>(`/api/user/${login?.user.uid}`);
+      const { data } = await axios<User>(`/api/user/${login.user.uid}`);
       setUsername(data.username);
       router.push("/");
     } else {

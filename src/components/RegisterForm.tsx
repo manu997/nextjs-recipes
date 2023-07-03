@@ -32,19 +32,11 @@ const RegisterForm = () => {
   const handleRegister = async () => {
     setLoading(true);
     try {
-      await axios.post<User>("/api/users", newUser);
+      const { data } = await axios.post<User>("/api/users", newUser);
       toast.success("¡Registro exitoso!");
-      const login = await signInWithEmailAndPassword(
-        newUser.email,
-        newUser.password
-      );
-      if (login?.user !== undefined) {
-        const { data } = await axios<User>(`/api/user/${login?.user.uid}`);
-        setUsername(data.username);
-        router.push("/");
-      } else {
-        toast.error(errorMessages[error?.code as string]);
-      }
+      await signInWithEmailAndPassword(newUser.email, newUser.password);
+      setUsername(data.username);
+      router.push("/");
     } catch (error: Error | any) {
       setLoading(false);
       toast.error(errorMessages[error.request.response]);

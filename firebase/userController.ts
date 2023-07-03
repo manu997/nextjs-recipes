@@ -21,7 +21,7 @@ export const postUser = async (user: User) => {
         user.email,
         user.password
       );
-      const userWithAdditionalFields = {
+      const { password, ...userWithAdditionalFields } = {
         ...user,
         id: userCreated.user.uid,
         recipes: [],
